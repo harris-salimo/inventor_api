@@ -3,7 +3,7 @@ import { registerValidator } from '#validators/auth/register'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class RegistrationsController {
-  async store({ request, auth, response }: HttpContext) {
+  async store({ request, response }: HttpContext) {
     const payload = await request.validateUsing(registerValidator)
 
     const user = await User.create(payload)
