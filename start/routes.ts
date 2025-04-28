@@ -9,6 +9,8 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+import AutoSwagger from 'adonis-autoswagger'
+import swagger from '#config/swagger'
 
 const AuthenticationController = () => import('#controllers/auth/authentication_controller')
 const RegistrationController = () => import('#controllers/auth/registration_controller')
@@ -19,8 +21,13 @@ router
   .delete('logout', [AuthenticationController, 'destroy'])
   .use(middleware.auth({ guards: ['api'] }))
 
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
+router.get('/swagger', async () => {
+  return AutoSwagger.default.docs(router.toJSON(), swagger)
+})
+router.get('/docs', async () => {
+  return AutoSwagger.default.ui('/swagger', swagger)
+})
+
+router.get('/', async ({ response }) => {
+  return response.redirect('/docs')
 })
