@@ -7,7 +7,7 @@ export default {
   tagIndex: 2,
   productionEnv: 'production',
   info: {
-    title: 'title',
+    title: 'Inventor API',
     version: '1.0.0',
     description: '',
   },
