@@ -14,7 +14,7 @@ export default class AuthenticationController {
 
     const user = await User.verifyCredentials(email, password)
 
-    return await auth.use('api').createToken(user)
+    return await auth.use('api').createToken(user, ['*'], { name: 'access_token' })
   }
 
   /**

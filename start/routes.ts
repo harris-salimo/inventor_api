@@ -19,10 +19,10 @@ const CategoriesController = () => import('#controllers/categories_controller')
 const ItemsController = () => import('#controllers/items_controller')
 const DashboardController = () => import('#controllers/dashboard_controller')
 
-router.post('registration', [RegistrationController, 'store'])
-router.post('login', [AuthenticationController, 'store'])
+router.post('/registration', [RegistrationController, 'store'])
+router.post('/login', [AuthenticationController, 'store'])
 router
-  .delete('logout', [AuthenticationController, 'destroy'])
+  .delete('/logout', [AuthenticationController, 'destroy'])
   .use(middleware.auth({ guards: ['api'] }))
 
 router.get('/swagger', async () => {
@@ -45,7 +45,13 @@ router
   .apiOnly()
   .use('*', middleware.auth({ guards: ['api'] }))
 
-router.get('dashboard', [DashboardController]).use(middleware.auth({ guards: ['api'] }))
+router
+  .get('/user', ({ auth }) => {
+    return auth.user
+  })
+  .use(middleware.auth({ guards: ['api'] }))
+
+router.get('/dashboard', [DashboardController]).use(middleware.auth({ guards: ['api'] }))
 
 router.get('/', async ({ response }) => {
   return response.redirect('/docs')

@@ -12,7 +12,7 @@ export const UserFactory = factory
     return {
       fullName: `${firstName} ${lastName}`,
       email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
-      password: await hash.make('password'),
+      password: 'password',
     }
   })
   .relation('role', () => RoleFactory)
