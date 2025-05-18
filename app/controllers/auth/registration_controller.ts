@@ -1,3 +1,4 @@
+import UserRegistered from '#events/auth/user_registered'
 import Role from '#models/role'
 import { registerValidator } from '#validators/auth/register'
 import type { HttpContext } from '@adonisjs/core/http'
@@ -15,6 +16,8 @@ export default class RegistrationsController {
     const userRole = await Role.findByOrFail('name', 'User')
     const user = await userRole.related('users').create(payload)
 
-    return response.created({ id: user.id, fullName: user.fullName, email: user.email })
+    UserRegistered.dispatch(user)
+
+    return response.created({ message: 'USER_REGISTERED' })
   }
 }
