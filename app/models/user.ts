@@ -17,7 +17,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column({ isPrimary: true })
   declare id: number
 
-  @column()
+  @column({ serializeAs: null })
   declare roleId: number
 
   @column()
@@ -32,7 +32,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @belongsTo(() => Role, { serializeAs: null })
   declare role: BelongsTo<typeof Role>
 
-  @hasMany(() => Category)
+  @hasMany(() => Category, { serializeAs: null })
   declare categories: HasMany<typeof Category>
 
   @column.dateTime({ autoCreate: true })

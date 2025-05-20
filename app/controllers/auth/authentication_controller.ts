@@ -20,8 +20,9 @@ export default class AuthenticationController {
       sameSite: 'lax',
       maxAge: 60 * 60 * 24, // 1 day
     })
+    await auth.use('api').authenticate()
 
-    return response.ok({ message: 'LOGGED_IN' })
+    return response.ok({ message: 'LOGGED_IN', user })
   }
 
   /**
