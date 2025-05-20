@@ -22,7 +22,7 @@ const DashboardController = () => import('#controllers/dashboard_controller')
 router.post('/registration', [RegistrationController, 'store'])
 router.post('/login', [AuthenticationController, 'store'])
 router
-  .delete('/logout', [AuthenticationController, 'destroy'])
+  .post('/logout', [AuthenticationController, 'destroy'])
   .use(middleware.auth({ guards: ['api'] }))
 
 router.get('/swagger', async () => {

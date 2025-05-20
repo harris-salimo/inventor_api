@@ -1,6 +1,5 @@
 import factory from '@adonisjs/lucid/factories'
 import User from '#models/user'
-import hash from '@adonisjs/core/services/hash'
 import { RoleFactory } from '#database/factories/role_factory'
 import { CategoryFactory } from '#database/factories/category_factory'
 
@@ -13,6 +12,8 @@ export const UserFactory = factory
       fullName: `${firstName} ${lastName}`,
       email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
       password: 'password',
+      avatar: faker.image.avatar(),
+      emailVerifiedAt: faker.date.past().toUTCString(),
     }
   })
   .relation('role', () => RoleFactory)
