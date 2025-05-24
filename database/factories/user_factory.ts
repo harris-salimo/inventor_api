@@ -13,7 +13,7 @@ export const UserFactory = factory
       email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
       password: 'password',
       avatar: faker.image.avatar(),
-      emailVerifiedAt: faker.date.past().toUTCString(),
+      emailVerifiedAt: faker.date.recent() as any,
     }
   })
   .relation('role', () => RoleFactory)
